@@ -11,7 +11,7 @@ const config: Config = {
       poppins: ["'Poppins', sans-serif"],
     },
     colors: {
-      cream: "#F5F7F8",
+      cream: "#d1d8e0",
       "theme-primary": "#495E57",
       "theme-dark": "#45474B",
       "theme-secondary": "#F4CE14",

@@ -5,7 +5,10 @@ const NavItems = () => {
   return (
     <>
       <CustomLink path="/" text="Home" />
-      <CustomLink path="/about" text="About" />
+      <CustomLink path="/products" text="Products" />
+      <CustomLink path="/contact" text="Contact" />
+      <CustomLink path="/dashboard" text="Dashboard" />
+      <CustomLink path="/login" text="Login" />
     </>
   );
 };
