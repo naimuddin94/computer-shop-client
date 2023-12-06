@@ -7,11 +7,17 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontFamily: {
+      poppins: ["'Poppins', sans-serif"],
+    },
     colors: {
-      "theme-gray": "#F5F7F8",
-      primary: "#495E57",
-      dark: "#45474B",
-      secondary: "#F4CE14",
+      cream: "#F5F7F8",
+      "theme-primary": "#495E57",
+      "theme-dark": "#45474B",
+      "theme-secondary": "#F4CE14",
+      "dark-text": "#2f3640",
+      "light-text": "#576574",
+      white: "#FFFFFF",
     },
   },
   plugins: [require("daisyui")],
