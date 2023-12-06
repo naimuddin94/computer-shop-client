@@ -9,19 +9,23 @@ const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <form>
-      <InputField label="Name" placeholder="enter your full name" name="name" />
       <InputField
         label="Name"
-        type="file"
         placeholder="enter your full name"
-        name="photo"
+        fieldName="name"
+      />
+      <InputField
+        label="Name"
+        inputType="file"
+        placeholder="enter your full name"
+        fieldName="photo"
         styles="file-input file-input-bordered file-input-accent rounded w-full"
       />
       <InputField
         label="Email"
         placeholder="enter your email address"
-        type="email"
-        name="email"
+        inputType="email"
+        fieldName="email"
       />
       <PasswordField
         text="Already have an account?"

@@ -2,8 +2,8 @@ import { InputFieldProps } from "@/types/types";
 
 const InputField = ({
   label,
-  type = "text",
-  name,
+  inputType = "text",
+  fieldName,
   placeholder,
   styles = "input input-bordered rounded",
 }: InputFieldProps) => {
@@ -13,8 +13,8 @@ const InputField = ({
         <span className="label-text">{label}</span>
       </label>
       <input
-        name={name}
-        type={type}
+        name={fieldName}
+        type={inputType}
         placeholder={placeholder}
         className={styles}
         required

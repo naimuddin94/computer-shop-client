@@ -3,8 +3,9 @@ import { CustomLinkProps } from "@/types/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const CustomLink = ({ path, text }: CustomLinkProps) => {
+const CustomLink = ({ path, text, icons: Icon }: CustomLinkProps) => {
   const pathName = usePathname();
+
   return (
     <Link
       className={`px-4 py-2 rounded font-medium ${

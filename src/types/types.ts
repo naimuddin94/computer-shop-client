@@ -7,6 +7,7 @@ export interface ChildrenProps {
 export interface CustomLinkProps {
   path: string;
   text: string;
+  icons?: ReactNode;
 }
 
 export interface PasswordFieldProps {
@@ -17,8 +18,13 @@ export interface PasswordFieldProps {
 
 export interface InputFieldProps {
   label: string;
-  type?: string;
-  name: string;
+  inputType?: string;
+  fieldName: string;
   placeholder: string;
   styles?: string;
+}
+
+export interface LoginInput {
+  email: string;
+  password: string;
 }
