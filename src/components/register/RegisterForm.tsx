@@ -15,7 +15,7 @@ const RegisterForm = () => {
         type="file"
         placeholder="enter your full name"
         name="photo"
-        styles="file-input file-input-bordered file-input-accent rounded"
+        styles="file-input file-input-bordered file-input-accent rounded w-full"
       />
       <InputField
         label="Email"
