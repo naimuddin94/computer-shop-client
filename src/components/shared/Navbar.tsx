@@ -8,17 +8,17 @@ const Navbar = ({ children }: ChildrenProps) => {
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         {/* Navbar */}
-        <div className="w-full navbar bg-theme-primary h-12 sticky top-0">
+        <div className="w-full navbar h-12 sticky top-0 shadow-sm">
           <div className="flex-none lg:hidden">
             <label
               htmlFor="my-drawer-3"
               aria-label="open sidebar"
               className="btn btn-square btn-ghost"
             >
-              <RxHamburgerMenu size={20} />
+              <RxHamburgerMenu size={20} className="text-theme-color-200" />
             </label>
           </div>
-          <div className="flex-1 px-2 mx-2 text-lg text-theme-secondary">
+          <div className="flex-1 px-2 mx-2 text-lg text-theme-color-200">
             City Computer
           </div>
           <div className="flex-none hidden lg:block">
@@ -37,7 +37,7 @@ const Navbar = ({ children }: ChildrenProps) => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-4 w-80 min-h-full bg-theme-primary space-y-2">
+        <ul className="menu p-4 w-80 min-h-full bg-theme-secondary space-y-2">
           {/* Sidebar content here */}
           <NavItems />
         </ul>
