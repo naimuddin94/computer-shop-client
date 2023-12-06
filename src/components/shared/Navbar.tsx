@@ -18,7 +18,7 @@ const Navbar = ({ children }: ChildrenProps) => {
               <RxHamburgerMenu size={20} className="text-theme-color-200" />
             </label>
           </div>
-          <div className="flex-1 px-2 mx-2 text-lg text-theme-color-200">
+          <div className="flex-1 px-2 mx-2 text-lg text-theme-color-200 font-extralight">
             City Computer
           </div>
           <div className="flex-none hidden lg:block">
@@ -37,8 +37,10 @@ const Navbar = ({ children }: ChildrenProps) => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-4 w-80 min-h-full bg-theme-secondary space-y-2">
+        <ul className="menu p-4 w-80 min-h-full bg-cream space-y-2">
           {/* Sidebar content here */}
+          <h1 className="text-lg font-extralight text-theme-color-200">City Computer</h1>
+          <hr className="text-theme-color-200" />
           <NavItems />
         </ul>
       </div>

@@ -17,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-cream font-poppins text-dark-text">
+      <body className="bg-cream font-poppins text-text">
         <Navbar>{children}</Navbar>
       </body>
     </html>
