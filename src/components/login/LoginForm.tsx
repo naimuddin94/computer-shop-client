@@ -1,5 +1,4 @@
 "use client";
-import { LoginInput } from "@/types/types";
 import InputField from "../utility/InputField";
 import PasswordField from "../utility/PasswordField";
 import { FormEvent } from "react";

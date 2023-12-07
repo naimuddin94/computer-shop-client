@@ -23,8 +23,3 @@ export interface InputFieldProps {
   placeholder: string;
   styles?: string;
 }
-
-export interface LoginInput {
-  email: string;
-  password: string;
-}
