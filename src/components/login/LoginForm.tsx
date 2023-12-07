@@ -1,26 +1,58 @@
 "use client";
-import InputField from "../utility/InputField";
-import PasswordField from "../utility/PasswordField";
-import { FormEvent } from "react";
+import Link from "next/link";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const LoginForm = () => {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const email = form.email.value;
-    const password = form.password.value;
-    console.log({ email, password });
-  };
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <InputField
-        fieldName="email"
-        label="Email"
-        inputType="email"
-        placeholder="enter your email address"
-      />
-      <PasswordField text="New to here?" path="/register" urlName="Register" />
+    
+    <form>
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Email</span>
+        </label>
+        <input
+          type="email"
+          placeholder="enter your email address"
+          className="input input-bordered rounded"
+          required
+        />
+      </div>
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Password</span>
+        </label>
+        <div className="relative">
+          <input
+            name="password"
+            type={showPassword ? "text" : "password"}
+            placeholder="type your password"
+            className="input input-bordered rounded w-full"
+            required
+          />
+          {showPassword ? (
+            <FaEye
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-[28%] text-xl cursor-pointer"
+            />
+          ) : (
+            <FaEyeSlash
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-[28%] text-xl cursor-pointer"
+            />
+          )}
+        </div>
+        <label className="label">
+          <span className="label-text-alt">
+            New to here?
+            <Link href="/register" className="link link-hover ml-2">
+              Register
+            </Link>
+          </span>
+        </label>
+      </div>
       <div className="form-control mt-6">
         <button className="btn btn-accent rounded">Login</button>
       </div>
