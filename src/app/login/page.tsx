@@ -1,4 +1,5 @@
 import { LoginForm, SocialLogin } from "@/components";
+import Navbar from "@/components/shared/Navbar";
 
 const LoginPage = () => {
   return (

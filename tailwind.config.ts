@@ -13,6 +13,7 @@ const config: Config = {
     colors: {
       cream: "#F5F7F8",
       white: "#ffffff",
+      red: "#FF0000",
       text: "#2b3440",
       "theme-yellow": "#FFC300",
       "theme-color-100": "#FF5733",

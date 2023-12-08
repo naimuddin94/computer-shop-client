@@ -1,4 +1,5 @@
 import { LoginForm } from "@/components";
+import { brands, categories } from "@/utils/utils";
 import * as yup from "yup";
 
 export const RegisterSchema = yup.object({
@@ -33,4 +34,38 @@ export const RegisterSchema = yup.object({
       "Password must contain at least one special character"
     )
     .label("Password"),
+});
+
+export const AddProductSchema = yup.object({
+  name: yup.string().required().label("Name"),
+  images: yup
+    .mixed()
+    .test("imagesLength", "You need select 3 images", (value: any) => {
+      if (value.length === 3) return true;
+      return false;
+    })
+    .test("fileSize", "Every image should be smaller than 1 MB", (value: any) => {
+      if (!value || !("length" in value) || value.length === 0) {
+        return true;
+      }
+
+      let result = true;
+      const maxSize = 1024 * 1024; // 1 MB
+      const files = Object.values(value);
+
+      files.forEach((file: any) => {
+        if (file?.size > maxSize) {
+          result = false;
+        }
+      });
+      return result;
+    }).label("Images"),
+  brand: yup.string().oneOf(brands, "You have to select brand name").required().label("Brand"),
+  category: yup
+    .string()
+    .oneOf(categories, "You have to select category")
+    .required().label("Category"),
+  price: yup.number().typeError("Price must be a valid number").positive().label("Price"),
+  features: yup.string().required().label("Features"),
+  description: yup.string().required().label("Description"),
 });
