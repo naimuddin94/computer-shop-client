@@ -44,28 +44,65 @@ export const AddProductSchema = yup.object({
       if (value.length === 3) return true;
       return false;
     })
-    .test("fileSize", "Every image should be smaller than 1 MB", (value: any) => {
-      if (!value || !("length" in value) || value.length === 0) {
-        return true;
-      }
-
-      let result = true;
-      const maxSize = 1024 * 1024; // 1 MB
-      const files = Object.values(value);
-
-      files.forEach((file: any) => {
-        if (file?.size > maxSize) {
-          result = false;
+    .test(
+      "fileSize",
+      "Every image should be smaller than 1 MB",
+      (value: any) => {
+        if (!value || !("length" in value) || value.length === 0) {
+          return true;
         }
-      });
-      return result;
-    }).label("Images"),
-  brand: yup.string().oneOf(brands, "You have to select brand name").required().label("Brand"),
+
+        let result = true;
+        const maxSize = 1024 * 1024; // 1 MB
+        const files = Object.values(value);
+
+        files.forEach((file: any) => {
+          if (file?.size > maxSize) {
+            result = false;
+          }
+        });
+        return result;
+      }
+    )
+    .label("Images"),
+  brand: yup
+    .string()
+    .oneOf(brands, "You have to select brand name")
+    .required()
+    .label("Brand"),
   category: yup
     .string()
     .oneOf(categories, "You have to select category")
-    .required().label("Category"),
-  price: yup.number().typeError("Price must be a valid number").positive().label("Price"),
-  features: yup.string().required().label("Features"),
-  description: yup.string().required().label("Description"),
+    .required()
+    .label("Category"),
+  price: yup
+    .number()
+    .typeError("Price must be a valid number")
+    .positive()
+    .label("Price"),
+  features: yup
+    .string()
+    .required()
+    .test(
+      "check-features",
+      "Features should have at least four sections separated by commas, with each section having at least 10 characters",
+      (value) => {
+        if (!value) return false;
+        const sections = value.split(",");
+        const minCharacters = 10;
+        const minSection = 4;
+        if (sections.length < minSection) return false;
+
+        const validSection = sections.filter(
+          (section) => section.trim().length > minCharacters
+        );
+        return validSection.length >= minSection;
+      }
+    )
+    .label("Features"),
+  description: yup
+    .string()
+    .required()
+    .min(200, "Description must be at least 200 character")
+    .label("Description"),
 });

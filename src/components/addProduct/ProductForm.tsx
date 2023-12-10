@@ -19,7 +19,6 @@ const ProductForm = () => {
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     trigger,
     formState: { errors },
@@ -191,7 +190,7 @@ const ProductForm = () => {
                   {...register("features")}
                   rows={4}
                   className="textarea textarea-bordered rounded w-full"
-                  placeholder="Enter product features........"
+                  placeholder="Enter product features with ',' to separate add min 4 features........"
                 ></textarea>
               </div>
               {errors.features?.message && (
