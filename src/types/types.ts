@@ -45,3 +45,12 @@ export interface NavigationProps {
   next: () => void;
   steps: Array<Steps>;
 }
+
+export interface IImages {
+  name: string;
+  lastModified: number;
+  lastModifiedDate: Date;
+  webkitRelativePath: string;
+  size: number;
+  type: string;
+}

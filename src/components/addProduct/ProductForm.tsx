@@ -8,7 +8,7 @@ import { AddProductSchema } from "@/lib/yupSchemas";
 import { brands, categories, steps } from "@/utils/utils";
 import FormStemNavigation from "./FormStepNavigation";
 import Navigation from "./Navigation";
-
+import { v2 as cloudinary } from "cloudinary-core";
 interface Inputs extends yup.Asserts<typeof AddProductSchema> {}
 
 const ProductForm = () => {
@@ -26,10 +26,29 @@ const ProductForm = () => {
     resolver: yupResolver(AddProductSchema),
   });
 
-  const processForm: SubmitHandler<Inputs> = (data) => {
+  const processForm: SubmitHandler<Inputs> = async (data) => {
     const { images, features: stringFeatures, ...reamingData } = data;
     const features = stringFeatures.split(",");
-    console.log(images, features, reamingData);
+
+    const file = images[0];
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "pntxhvfd");
+
+    try {
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/dxoncladp/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      const data = await response.json();
+      console.log({ image: data.secure_url });
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+
     reset();
   };
 
