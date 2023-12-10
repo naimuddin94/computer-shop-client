@@ -28,3 +28,20 @@ export interface LoginInputs {
   email: string;
   password: string;
 }
+
+export interface FormNavigationProps {
+  currentStep: number;
+}
+
+interface Steps {
+  id: string;
+  name: string;
+  fields: string[];
+}
+
+export interface NavigationProps {
+  prev: () => void;
+  currentStep: number;
+  next: () => void;
+  steps: Array<Steps>;
+}

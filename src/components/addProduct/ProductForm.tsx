@@ -5,21 +5,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { AddProductSchema } from "@/lib/yupSchemas";
-import { brands, categories } from "@/utils/utils";
-
-const steps = [
-  {
-    id: "Step 1",
-    name: "Product Information",
-    fields: ["name", "images", "category", "brand", "price"],
-  },
-  {
-    id: "Step 2",
-    name: "Features",
-    fields: ["features"],
-  },
-  { id: "Step 3", name: "Description", fields: ["description"] },
-];
+import { brands, categories, steps } from "@/utils/utils";
+import FormStemNavigation from "./FormStepNavigation";
+import Navigation from "./Navigation";
 
 interface Inputs extends yup.Asserts<typeof AddProductSchema> {}
 
@@ -67,40 +55,9 @@ const ProductForm = () => {
 
   return (
     <section>
-      {/* steps */}
-      <nav aria-label="Progress">
-        <ol role="list" className="space-y-4 md:flex md:space-x-8 md:space-y-0">
-          {steps.map((step, index) => (
-            <li key={step.name} className="md:flex-1">
-              {currentStep > index ? (
-                <div className="group flex w-full flex-col border-l-4 border-theme-primary py-2 pl-4 transition-colors md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4">
-                  <span className="text-sm font-medium text-theme-primary transition-colors ">
-                    {step.id}
-                  </span>
-                  <span className="text-sm font-medium">{step.name}</span>
-                </div>
-              ) : currentStep === index ? (
-                <div
-                  className="flex w-full flex-col border-l-4 border-theme-primary py-2 pl-4 md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4"
-                  aria-current="step"
-                >
-                  <span className="text-sm font-medium text-theme-primary">
-                    {step.id}
-                  </span>
-                  <span className="text-sm font-medium">{step.name}</span>
-                </div>
-              ) : (
-                <div className="group flex w-full flex-col border-l-4 border-[#c8d6e5] py-2 pl-4 transition-colors md:border-l-0 md:border-t-4 md:pb-0 md:pl-0 md:pt-4">
-                  <span className="text-sm font-medium text-gray-500 transition-colors">
-                    {step.id}
-                  </span>
-                  <span className="text-sm font-medium">{step.name}</span>
-                </div>
-              )}
-            </li>
-          ))}
-        </ol>
-      </nav>
+      {/* navigation steps */}
+      <FormStemNavigation currentStep={currentStep} />
+
       <form onSubmit={handleSubmit(processForm)}>
         {currentStep === 0 && (
           <motion.div
@@ -137,7 +94,7 @@ const ProductForm = () => {
                   className="file-input file-input-bordered file-input-accent rounded w-full"
                 />
                 {errors.images?.message && (
-                  <p className="mt-2 text-sm text-red">
+                  <p className="mt-1 text-sm text-red">
                     {errors.images.message}
                   </p>
                 )}
@@ -280,52 +237,12 @@ const ProductForm = () => {
         )}
       </form>
       {/* Navigation */}
-      <div className="pt-4">
-        <div className="flex justify-between">
-          <button
-            type="button"
-            onClick={prev}
-            disabled={currentStep === 0}
-            className="rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 19.5L8.25 12l7.5-7.5"
-              />
-            </svg>
-          </button>
-          <button
-            type="button"
-            onClick={next}
-            disabled={currentStep === steps.length - 1}
-            className="rounded bg-white px-2 py-1 text-sm font-semibold text-sky-900 shadow-sm ring-1 ring-inset ring-sky-300 hover:bg-sky-50 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M8.25 4.5l7.5 7.5-7.5 7.5"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+      <Navigation
+        prev={prev}
+        next={next}
+        currentStep={currentStep}
+        steps={steps}
+      />
     </section>
   );
 };

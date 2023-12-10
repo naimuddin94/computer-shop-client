@@ -45,3 +45,16 @@ export const categories = [
   "Docking Stations",
 ];
 
+export const steps = [
+  {
+    id: "Step 1",
+    name: "Product Information",
+    fields: ["name", "images", "category", "brand", "price"],
+  },
+  {
+    id: "Step 2",
+    name: "Features",
+    fields: ["features"],
+  },
+  { id: "Step 3", name: "Description", fields: ["description"] },
+];
