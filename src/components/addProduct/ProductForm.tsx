@@ -27,7 +27,9 @@ const ProductForm = () => {
   });
 
   const processForm: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
+    const { images, features: stringFeatures, ...reamingData } = data;
+    const features = stringFeatures.split(",");
+    console.log(images, features, reamingData);
     reset();
   };
 
