@@ -8,7 +8,6 @@ import { AddProductSchema } from "@/lib/yupSchemas";
 import { brands, categories, steps } from "@/utils/utils";
 import FormStemNavigation from "./FormStepNavigation";
 import Navigation from "./Navigation";
-import { v2 as cloudinary } from "cloudinary-core";
 interface Inputs extends yup.Asserts<typeof AddProductSchema> {}
 
 const ProductForm = () => {
@@ -29,28 +28,41 @@ const ProductForm = () => {
   const processForm: SubmitHandler<Inputs> = async (data) => {
     const { images, features: stringFeatures, ...reamingData } = data;
     const features = stringFeatures.split(",");
+    console.log(features, reamingData);
 
-    const file = Array.isArray(images) && images.length > 0 ? images[0] : null;
-    if (file) {
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", "pntxhvfd");
+    if (images instanceof FileList) {
+      const imagesArray = Array.from(images);
+      const formDataArray = imagesArray.map((image) => {
+        const formData = new FormData();
+        formData.append("file", image);
+        formData.append("upload_preset", "pntxhvfd");
+        return formData;
+      });
 
       try {
-        const response = await fetch(
-          `https://api.cloudinary.com/v1_1/dxoncladp/image/upload`,
-          {
-            method: "POST",
-            body: formData,
-          }
+        const uploadPromises = formDataArray.map((formData) => {
+          return fetch(
+            `https://api.cloudinary.com/v1_1/dxoncladp/image/upload`,
+            {
+              method: "POST",
+              body: formData,
+            }
+          );
+        });
+
+        const responses = await Promise.all(uploadPromises);
+        const uploadedImages = await Promise.all(
+          responses.map((res) => res.json())
         );
-        const data = await response.json();
-        console.log({ image: data.secure_url });
+
+        // Log or process uploaded image URLs
+        console.log(
+          "Uploaded Images:",
+          uploadedImages.map((data) => data.secure_url)
+        );
       } catch (error) {
         console.error("Error uploading image:", error);
       }
-
-      reset();
     }
   };
 
