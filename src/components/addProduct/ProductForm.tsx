@@ -8,9 +8,11 @@ import { AddProductSchema } from "@/lib/yupSchemas";
 import { brands, categories, steps } from "@/utils/utils";
 import FormStemNavigation from "./FormStepNavigation";
 import Navigation from "./Navigation";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 interface Inputs extends yup.Asserts<typeof AddProductSchema> {}
 
 const ProductForm = () => {
+  const axiosSecure = useAxiosSecure();
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
   const delta = currentStep - previousStep;
@@ -20,7 +22,7 @@ const ProductForm = () => {
     handleSubmit,
     reset,
     trigger,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<Inputs>({
     resolver: yupResolver(AddProductSchema),
   });
@@ -68,7 +70,9 @@ const ProductForm = () => {
 
         const product = { images, features, ...reamingData, publisher };
 
-        console.log(product);
+        await axiosSecure.post("/products", product).then((res) => {
+          console.log(res.data);
+        });
       } catch (error) {
         console.error("Error uploading image:", error);
       }
@@ -272,8 +276,12 @@ const ProductForm = () => {
               )}
             </div>
             <div className="form-control mt-2">
-              <button className="btn btn-accent rounded w-fit ml-auto">
-                Add Product
+              <button className="btn btn-accent rounded ml-auto min-w-[200px]">
+                {isSubmitting ? (
+                  <span className="loading loading-spinner text-warning"></span>
+                ) : (
+                  "Add Product"
+                )}
               </button>
             </div>
           </motion.div>
