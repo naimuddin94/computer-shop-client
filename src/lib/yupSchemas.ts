@@ -82,6 +82,7 @@ export const AddProductSchema = yup.object({
     .label("Price"),
   features: yup
     .string()
+    .max(200, "Features must be at most 200 characters")
     .required()
     .test(
       "check-features",
@@ -104,5 +105,6 @@ export const AddProductSchema = yup.object({
     .string()
     .required()
     .min(200, "Description must be at least 200 character")
+    .max(800, "Description must be at most 800 characters")
     .label("Description"),
 });

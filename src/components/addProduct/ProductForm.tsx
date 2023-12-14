@@ -26,12 +26,16 @@ const ProductForm = () => {
   });
 
   const processForm: SubmitHandler<Inputs> = async (data) => {
-    const { images, features: stringFeatures, ...reamingData } = data;
+    const {
+      images: imageFiles,
+      features: stringFeatures,
+      ...reamingData
+    } = data;
     const features = stringFeatures.split(",");
     console.log(features, reamingData);
 
-    if (images instanceof FileList) {
-      const imagesArray = Array.from(images);
+    if (imageFiles instanceof FileList) {
+      const imagesArray = Array.from(imageFiles);
       const formDataArray = imagesArray.map((image) => {
         const formData = new FormData();
         formData.append("file", image);
@@ -55,11 +59,16 @@ const ProductForm = () => {
           responses.map((res) => res.json())
         );
 
-        // Log or process uploaded image URLs
-        console.log(
-          "Uploaded Images:",
-          uploadedImages.map((data) => data.secure_url)
-        );
+        const images = uploadedImages.map((data) => data.secure_url);
+
+        const publisher = {
+          name: "Esmail Hossen",
+          email: "esmail@gmail.com",
+        };
+
+        const product = { images, features, ...reamingData, publisher };
+
+        console.log(product);
       } catch (error) {
         console.error("Error uploading image:", error);
       }
