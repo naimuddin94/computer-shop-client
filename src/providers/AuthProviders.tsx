@@ -44,12 +44,15 @@ const AuthProviders = ({ children }: ReactNodeProps) => {
   const authInfo = {
     user,
     username,
+    setUsername,
     photo,
+    setPhoto,
     role,
     loading,
     createUser,
     loginUser,
   };
+
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
