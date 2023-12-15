@@ -1,16 +1,33 @@
+"use client";
 import { auth } from "@/firebase/firebase.config";
 import { IAuthContext, ReactNodeProps } from "@/types/types";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  User,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth/cordova";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext<IAuthContext | null>(null);
 
 const AuthProviders = ({ children }: ReactNodeProps) => {
+  const [user, setUser] = useState<User | null>(null);
   const [username, setUsername] = useState("");
   const [photo, setPhoto] = useState("");
   const [role, setRole] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const unSubscribed = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+
+    return () => {
+      return unSubscribed();
+    };
+  }, []);
 
   // user create with email and password
   const createUser = (email: string, password: string) => {
@@ -24,7 +41,15 @@ const AuthProviders = ({ children }: ReactNodeProps) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const authInfo = { username, photo, role, loading, createUser, loginUser };
+  const authInfo = {
+    user,
+    username,
+    photo,
+    role,
+    loading,
+    createUser,
+    loginUser,
+  };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );

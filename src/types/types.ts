@@ -1,4 +1,4 @@
-import { UserCredential } from "firebase/auth";
+import { User, UserCredential } from "firebase/auth";
 import { ReactNode } from "react";
 
 export interface ChildrenProps {
@@ -61,6 +61,7 @@ export interface ReactNodeProps {
 }
 
 export interface IAuthContext {
+  user: User | null;
   username: string;
   photo: string;
   role: string;
