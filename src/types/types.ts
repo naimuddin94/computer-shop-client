@@ -1,3 +1,4 @@
+import { UserCredential } from "firebase/auth";
 import { ReactNode } from "react";
 
 export interface ChildrenProps {
@@ -64,4 +65,6 @@ export interface IAuthContext {
   photo: string;
   role: string;
   loading: boolean;
+  createUser: (email: string, password: string) => Promise<UserCredential>;
+  loginUser: (email: string, password: string) => Promise<UserCredential>;
 }

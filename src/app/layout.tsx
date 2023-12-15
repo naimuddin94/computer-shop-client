@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/shared/Navbar";
+import AuthProviders from "@/providers/AuthProviders";
 
 const inter = Inter({ subsets: ["latin"] });
-
-
 
 export const metadata: Metadata = {
   title: "City Computers",
@@ -16,12 +15,14 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-  }) {
+}) {
   return (
-    <html lang="en">
-      <body className="bg-cream font-poppins text-text">
-        <Navbar>{children}</Navbar>
-      </body>
-    </html>
+    <AuthProviders>
+      <html lang="en">
+        <body className="bg-cream font-poppins text-text">
+          <Navbar>{children}</Navbar>
+        </body>
+      </html>
+    </AuthProviders>
   );
 }
