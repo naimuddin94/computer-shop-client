@@ -9,7 +9,7 @@ import {
 import { signInWithEmailAndPassword } from "firebase/auth/cordova";
 import { createContext, useEffect, useState } from "react";
 
-export const AuthContext = createContext<IAuthContext | null>(null);
+export const AuthContext = createContext<IAuthContext | null | any>(null);
 
 const AuthProviders = ({ children }: ReactNodeProps) => {
   const [user, setUser] = useState<User | null>(null);
@@ -28,6 +28,8 @@ const AuthProviders = ({ children }: ReactNodeProps) => {
       return unSubscribed();
     };
   }, []);
+
+  console.log(user);
 
   // user create with email and password
   const createUser = (email: string, password: string) => {

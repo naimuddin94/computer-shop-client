@@ -6,12 +6,18 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { RegisterSchema } from "@/lib/yupSchemas";
-
-
+import ImageUpload from "../shared/ImageUpload";
+import useAuthInfo from "@/hooks/useAuthInfo";
+import { UserCredential, updateProfile } from "firebase/auth";
+import { toast } from "react-toastify";
+import { FirebaseError } from "firebase/app";
+import { useRouter } from "next/navigation";
 
 interface RegisterInputs extends yup.Asserts<typeof RegisterSchema> {}
 
 const RegisterForm = () => {
+  const router = useRouter();
+  const { createUser, setUsername, setPhoto } = useAuthInfo();
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
@@ -23,8 +29,34 @@ const RegisterForm = () => {
   });
 
   const onSubmit: SubmitHandler<RegisterInputs> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log(data);
+    const { name, email, password, photoFile } = data;
+
+    let photo = "";
+    if (photoFile instanceof FileList) {
+      photo = await ImageUpload(photoFile[0]);
+    }
+
+    createUser(email, password)
+      .then((result: UserCredential) => {
+        toast.success("Account created successfully");
+        // update profile
+        setUsername(name);
+        setPhoto(photo);
+        updateProfile(result.user, {
+          displayName: name,
+          photoURL: photo,
+        })
+          .then(() => {
+            console.log("User name update successfully");
+            reset();
+            router.push("/");
+          })
+          .catch((err) => toast.error("During update profile", err.message));
+      })
+      .catch((err: FirebaseError) => {
+        const errorCode = err.code;
+        const errMessage = errorCode.replace("auth/", "");
+      });
   };
 
   return (
