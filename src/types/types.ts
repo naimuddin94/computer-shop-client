@@ -54,3 +54,14 @@ export interface IImages {
   size: number;
   type: string;
 }
+
+export interface ReactNodeProps {
+  children: ReactNode;
+}
+
+export interface IAuthContext {
+  username: string;
+  photo: string;
+  role: string;
+  loading: boolean;
+}
