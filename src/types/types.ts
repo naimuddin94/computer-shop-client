@@ -70,5 +70,6 @@ export interface IAuthContext {
   loading: boolean;
   createUser: (email: string, password: string) => Promise<UserCredential>;
   loginUser: (email: string, password: string) => Promise<UserCredential>;
+  googleLogin: () => Promise<UserCredential>;
   logoutUser: () => Promise<void>;
 }
