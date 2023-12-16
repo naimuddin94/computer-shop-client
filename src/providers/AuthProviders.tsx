@@ -21,7 +21,7 @@ const AuthProviders = ({ children }: ReactNodeProps) => {
   const [username, setUsername] = useState<string | undefined | null>(null);
   const [photo, setPhoto] = useState<string | undefined | null>(null);
   const [role, setRole] = useState<string | undefined | null>(null);
-  const [loading, setLoading] = useState(true);
+const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unSubscribed = onAuthStateChanged(auth, (currentUser) => {
