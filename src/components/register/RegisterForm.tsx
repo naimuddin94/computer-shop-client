@@ -56,6 +56,7 @@ const RegisterForm = () => {
       .catch((err: FirebaseError) => {
         const errorCode = err.code;
         const errMessage = errorCode.replace("auth/", "");
+        toast.error(errMessage);
       });
   };
 

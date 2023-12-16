@@ -5,6 +5,7 @@ import {
   User,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signOut,
 } from "firebase/auth";
 import { signInWithEmailAndPassword } from "firebase/auth/cordova";
 import { createContext, useEffect, useState } from "react";
@@ -13,8 +14,8 @@ export const AuthContext = createContext<IAuthContext | null | any>(null);
 
 const AuthProviders = ({ children }: ReactNodeProps) => {
   const [user, setUser] = useState<User | null>(null);
-  const [username, setUsername] = useState("");
-  const [photo, setPhoto] = useState("");
+  const [username, setUsername] = useState<string | undefined | null>(null);
+  const [photo, setPhoto] = useState<string | undefined | null>(null);
   const [role, setRole] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -22,6 +23,8 @@ const AuthProviders = ({ children }: ReactNodeProps) => {
     const unSubscribed = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+      setUsername(currentUser?.displayName);
+      setPhoto(currentUser?.photoURL);
     });
 
     return () => {
@@ -43,6 +46,11 @@ const AuthProviders = ({ children }: ReactNodeProps) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
+  // logout user
+  const logoutUser = () => {
+    return signOut(auth);
+  };
+
   const authInfo = {
     user,
     username,
@@ -53,6 +61,7 @@ const AuthProviders = ({ children }: ReactNodeProps) => {
     loading,
     createUser,
     loginUser,
+    logoutUser,
   };
 
   return (

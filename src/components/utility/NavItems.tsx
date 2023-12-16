@@ -1,6 +1,9 @@
+"use client";
+import useAuthInfo from "@/hooks/useAuthInfo";
 import CustomLink from "./CustomLink";
 
 const NavItems = () => {
+  const { user } = useAuthInfo();
   return (
     <>
       <CustomLink path="/" text="Home" />
@@ -8,7 +11,7 @@ const NavItems = () => {
       <CustomLink path="/addProduct" text="Add Products" />
       <CustomLink path="/contact" text="Contact" />
       <CustomLink path="/dashboard" text="Dashboard" />
-      <CustomLink path="/login" text="Login" />
+      {!user && <CustomLink path="/login" text="Login" />}
     </>
   );
 };

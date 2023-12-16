@@ -62,10 +62,13 @@ export interface ReactNodeProps {
 
 export interface IAuthContext {
   user: User | null;
-  username: string;
-  photo: string;
+  username: string | undefined | null;
+  setUsername: (name: string | undefined | null) => void;
+  photo: string | undefined | null;
+  setPhoto: (photo: string | undefined | null) => void;
   role: string;
   loading: boolean;
   createUser: (email: string, password: string) => Promise<UserCredential>;
   loginUser: (email: string, password: string) => Promise<UserCredential>;
+  logoutUser: () => Promise<void>;
 }
