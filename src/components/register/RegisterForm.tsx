@@ -12,6 +12,7 @@ import { UserCredential, updateProfile } from "firebase/auth";
 import { toast } from "react-toastify";
 import { FirebaseError } from "firebase/app";
 import { useRouter } from "next/navigation";
+import { capitalizeFirstLetter } from "@/utils/utils";
 
 interface RegisterInputs extends yup.Asserts<typeof RegisterSchema> {}
 
@@ -55,8 +56,9 @@ const RegisterForm = () => {
       })
       .catch((err: FirebaseError) => {
         const errorCode = err.code;
-        const errMessage = errorCode.replace("auth/", "");
-        toast.error(errMessage);
+        const message = errorCode.replace(/auth\//, "").replace(/-/g, " ");
+        const errorMessage = capitalizeFirstLetter(message);
+        toast.error(errorMessage);
       });
   };
 

@@ -16,7 +16,7 @@ const AuthProviders = ({ children }: ReactNodeProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [username, setUsername] = useState<string | undefined | null>(null);
   const [photo, setPhoto] = useState<string | undefined | null>(null);
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState<string | undefined | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -32,8 +32,6 @@ const AuthProviders = ({ children }: ReactNodeProps) => {
     };
   }, []);
 
-  console.log(user);
-
   // user create with email and password
   const createUser = (email: string, password: string) => {
     setLoading(true);
@@ -48,6 +46,9 @@ const AuthProviders = ({ children }: ReactNodeProps) => {
 
   // logout user
   const logoutUser = () => {
+    setPhoto(null);
+    setUsername(null);
+    setRole(null);
     return signOut(auth);
   };
 
@@ -62,6 +63,7 @@ const AuthProviders = ({ children }: ReactNodeProps) => {
     createUser,
     loginUser,
     logoutUser,
+    setLoading,
   };
 
   return (
