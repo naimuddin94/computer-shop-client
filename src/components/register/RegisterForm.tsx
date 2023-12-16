@@ -13,10 +13,12 @@ import { toast } from "react-toastify";
 import { FirebaseError } from "firebase/app";
 import { useRouter } from "next/navigation";
 import { handleFirebaseError } from "@/lib/customLibery";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 
 interface RegisterInputs extends yup.Asserts<typeof RegisterSchema> {}
 
 const RegisterForm = () => {
+  const axiosSecure = useAxiosSecure();
   const router = useRouter();
   const { createUser, setUsername, setPhoto, setLoading } = useAuthInfo();
   const [showPassword, setShowPassword] = useState(false);
@@ -39,7 +41,6 @@ const RegisterForm = () => {
 
     createUser(email, password)
       .then((result: UserCredential) => {
-        toast.success("Account created successfully");
         // update profile
         setUsername(name);
         setPhoto(photo);
@@ -48,9 +49,19 @@ const RegisterForm = () => {
           photoURL: photo,
         })
           .then(() => {
-            console.log("User name update successfully");
-            reset();
-            router.push("/");
+            axiosSecure
+              .post("/users/create-user", { name, email })
+              .then((res) => {
+                toast.success(
+                  `🌺 Hi, ${name}. Your account created successfully`
+                );
+                reset();
+                router.push("/");
+              })
+              .catch((err) => {
+                setLoading(false);
+                toast.error(err.message);
+              });
           })
           .catch((err) => toast.error("During update profile", err.message));
       })
