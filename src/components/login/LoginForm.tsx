@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import { FirebaseError } from "firebase/app";
 import { UserCredential } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { capitalizeFirstLetter } from "@/utils/utils";
+import { handleFirebaseError } from "@/lib/customLibery";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +18,6 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
   } = useForm<LoginInputs>();
 
   const loginHandler: SubmitHandler<LoginInputs> = (data) => {
@@ -29,10 +28,7 @@ const LoginForm = () => {
         router.push("/");
       })
       .catch((err: FirebaseError) => {
-        const errorCode = err.code;
-        const message = errorCode.replace(/auth\//, "").replace(/-/g, " ");
-        const errorMessage = capitalizeFirstLetter(message);
-        toast.error(errorMessage);
+        handleFirebaseError(err);
         setLoading(false);
       });
   };

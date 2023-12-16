@@ -1,6 +1,6 @@
 "use client";
 import useAuthInfo from "@/hooks/useAuthInfo";
-import { capitalizeFirstLetter } from "@/utils/utils";
+import { handleFirebaseError } from "@/lib/customLibery";
 import { FirebaseError } from "firebase/app";
 import { UserCredential } from "firebase/auth";
 import { useRouter } from "next/navigation";
@@ -19,10 +19,7 @@ const SocialLogin = () => {
         router.push("/");
       })
       .catch((err: FirebaseError) => {
-        const errorCode = err.code;
-        const message = errorCode.replace(/auth\//, "").replace(/-/g, " ");
-        const errorMessage = capitalizeFirstLetter(message);
-        toast.error(errorMessage);
+        handleFirebaseError(err);
         setLoading(false);
       });
   };

@@ -59,6 +59,4 @@ export const steps = [
   { id: "Step 3", name: "Description", fields: ["description"] },
 ];
 
-export const capitalizeFirstLetter = (str: string): string => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-};
+
