@@ -8,7 +8,6 @@ export interface ChildrenProps {
 export interface CustomLinkProps {
   path: string;
   text: string;
-  icons?: ReactNode;
 }
 
 export interface PasswordFieldProps {
