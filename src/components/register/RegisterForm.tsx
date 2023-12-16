@@ -18,7 +18,7 @@ interface RegisterInputs extends yup.Asserts<typeof RegisterSchema> {}
 
 const RegisterForm = () => {
   const router = useRouter();
-  const { createUser, setUsername, setPhoto } = useAuthInfo();
+  const { createUser, setUsername, setPhoto, setLoading } = useAuthInfo();
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
@@ -59,6 +59,7 @@ const RegisterForm = () => {
         const message = errorCode.replace(/auth\//, "").replace(/-/g, " ");
         const errorMessage = capitalizeFirstLetter(message);
         toast.error(errorMessage);
+        return setLoading(false);
       });
   };
 
