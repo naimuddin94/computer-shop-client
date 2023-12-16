@@ -9,9 +9,13 @@ import { brands, categories, steps } from "@/utils/utils";
 import FormStemNavigation from "./FormStepNavigation";
 import Navigation from "./Navigation";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
+import ImageUpload from "../shared/ImageUpload";
+import { toast } from "react-toastify";
+import useAuthInfo from "@/hooks/useAuthInfo";
 interface Inputs extends yup.Asserts<typeof AddProductSchema> {}
 
 const ProductForm = () => {
+  const { user } = useAuthInfo();
   const axiosSecure = useAxiosSecure();
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
@@ -37,45 +41,23 @@ const ProductForm = () => {
     console.log(features, reamingData);
 
     if (imageFiles instanceof FileList) {
-      const imagesArray = Array.from(imageFiles);
-      const formDataArray = imagesArray.map((image) => {
-        const formData = new FormData();
-        formData.append("file", image);
-        formData.append("upload_preset", "pntxhvfd");
-        return formData;
+      const uploadPromises = Array.from(imageFiles).map(
+        async (imageFile) => await ImageUpload(imageFile)
+      );
+
+      const images = await Promise.all(uploadPromises);
+
+      const publisher = {
+        name: user?.displayName,
+        email: user?.email,
+      };
+
+      const product = { images, features, ...reamingData, publisher };
+
+      await axiosSecure.post("/products", product).then((res) => {
+        toast.success(res.data.message);
+        reset();
       });
-
-      try {
-        const uploadPromises = formDataArray.map((formData) => {
-          return fetch(
-            `https://api.cloudinary.com/v1_1/dxoncladp/image/upload`,
-            {
-              method: "POST",
-              body: formData,
-            }
-          );
-        });
-
-        const responses = await Promise.all(uploadPromises);
-        const uploadedImages = await Promise.all(
-          responses.map((res) => res.json())
-        );
-
-        const images = uploadedImages.map((data) => data.secure_url);
-
-        const publisher = {
-          name: "Esmail Hossen",
-          email: "esmail@gmail.com",
-        };
-
-        const product = { images, features, ...reamingData, publisher };
-
-        await axiosSecure.post("/products", product).then((res) => {
-          console.log(res.data);
-        });
-      } catch (error) {
-        console.error("Error uploading image:", error);
-      }
     }
   };
 
@@ -172,11 +154,12 @@ const ProductForm = () => {
                 </label>
                 <div className="relative">
                   <select
+                    defaultValue=""
                     id="brand"
                     {...register("brand")}
                     className="select select-accent w-full rounded"
                   >
-                    <option disabled selected>
+                    <option disabled value="">
                       Select product brand?
                     </option>
                     {brands?.map((brand) => (
@@ -198,11 +181,12 @@ const ProductForm = () => {
                 </label>
                 <div className="relative">
                   <select
+                    defaultValue=""
                     id="category"
                     {...register("category")}
                     className="select select-accent w-full rounded"
                   >
-                    <option disabled selected>
+                    <option disabled value="">
                       Select product category?
                     </option>
                     {categories?.map((category) => (
@@ -276,7 +260,10 @@ const ProductForm = () => {
               )}
             </div>
             <div className="form-control mt-2">
-              <button className="btn btn-accent rounded ml-auto min-w-[200px]">
+              <button
+                disabled={isSubmitting}
+                className="btn btn-accent rounded ml-auto min-w-[200px]"
+              >
                 {isSubmitting ? (
                   <span className="loading loading-spinner text-warning"></span>
                 ) : (
