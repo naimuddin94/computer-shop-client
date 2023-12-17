@@ -5,7 +5,7 @@ const layout = ({ children }: ChildrenProps) => {
   return (
     <div className="md:flex">
       <div className="flex-[2] bg-theme-color-100 min-h-[calc(100vh-64px)] p-5">
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-2 sticky top-24">
           <DashboardLink path="/dashboard" text="Summary" />
           <DashboardLink path="/dashboard/products" text="Products" />
           <DashboardLink path="/dashboard/category" text="Category" />

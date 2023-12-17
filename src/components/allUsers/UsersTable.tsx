@@ -5,8 +5,8 @@ import UsersTr from "./UsersTr";
 const UsersTable = ({ users }: UserTableProps) => {
   return (
     <div>
-      <div className="overflow-x-auto">
-        <table className="table">
+      <div>
+        <table className="table bg-white">
           {/* head */}
           <thead>
             <tr>

@@ -47,17 +47,17 @@ const UsersTr = ({ user }: { user: IUser }) => {
       <td>{role.toUpperCase()}</td>
       <td>{moment(created_at).startOf("day").fromNow()}</td>
       <td>
-        <div className="dropdown dropdown-end">
+        <div className="dropdown dropdown-left dropdown-end">
           <div
             tabIndex={0}
             role="button"
-            className="btn bg-gradient-to-br text-white hover:brightness-90 from-theme-color-200 to-theme-color-400"
+            className="btn rounded bg-gradient-to-br text-white hover:brightness-90 from-theme-color-200 to-theme-color-400"
           >
             Update Role
           </div>
           <ul
             tabIndex={0}
-            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+            className="dropdown-content z-50 text-white menu p-2 shadow bg-base-100 rounded w-52 bg-gradient-to-tr from-theme-color-200 to-theme-color-400"
           >
             <li onClick={() => handleRole("basic")}>
               <a>Basic</a>
