@@ -6,15 +6,14 @@ const UsersTable = ({ users }: UserTableProps) => {
   return (
     <div>
       <div>
-        <table className="table bg-white">
+        <table className="table bg-white rounded">
           {/* head */}
           <thead>
             <tr>
               <th>Person Information</th>
               <th>Role</th>
               <th>Created At</th>
-              <th>Role Update</th>
-              <th>Action</th>
+              <th className="flex justify-center">Role Update</th>
             </tr>
           </thead>
           <tbody>

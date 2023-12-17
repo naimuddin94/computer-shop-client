@@ -29,6 +29,10 @@ const UsersTr = ({ user }: { user: IUser }) => {
       }
     });
   };
+
+  const handleDeleteUser = () => {
+    console.log(_id);
+  }
   return (
     <tr>
       <td>
@@ -46,7 +50,7 @@ const UsersTr = ({ user }: { user: IUser }) => {
       </td>
       <td>{role.toUpperCase()}</td>
       <td>{moment(created_at).startOf("day").fromNow()}</td>
-      <td>
+      <td className="flex justify-center">
         <div className="dropdown dropdown-left dropdown-end">
           <div
             tabIndex={0}
@@ -73,11 +77,6 @@ const UsersTr = ({ user }: { user: IUser }) => {
             </li>
           </ul>
         </div>
-      </td>
-      <td>
-        <button className="btn text-white hover:brightness-90 bg-theme-color-200/10">
-          ❌
-        </button>
       </td>
     </tr>
   );
