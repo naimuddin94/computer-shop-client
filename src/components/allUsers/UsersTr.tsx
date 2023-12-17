@@ -10,7 +10,7 @@ const UsersTr = ({ user }: { user: IUser }) => {
       <td>
         <div className="flex items-center gap-3">
           <div className="avatar">
-            <div className="mask mask-squircle w-12 h-12">
+            <div className="mask mask-circle w-12 h-12">
               <Image src={photo} alt={name} width={48} height={48} />
             </div>
           </div>
@@ -22,9 +22,39 @@ const UsersTr = ({ user }: { user: IUser }) => {
       </td>
       <td>{role}</td>
       <td>{moment(created_at).startOf("day").fromNow()}</td>
-      <th>
-        <button className="btn btn-ghost btn-xs">details</button>
-      </th>
+      <td>
+        <div className="dropdown dropdown-end">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn bg-gradient-to-br text-white hover:brightness-90 from-theme-color-200 to-theme-color-400"
+          >
+            Update Role
+          </div>
+          <ul
+            tabIndex={0}
+            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <a>Basic</a>
+            </li>
+            <li>
+              <a>Operator</a>
+            </li>
+            <li>
+              <a>Manager</a>
+            </li>
+            <li>
+              <a>Admin</a>
+            </li>
+          </ul>
+        </div>
+      </td>
+      <td>
+        <button className="btn text-white hover:brightness-90 bg-theme-color-200/10">
+          ❌
+        </button>
+      </td>
     </tr>
   );
 };
