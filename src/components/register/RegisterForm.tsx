@@ -50,7 +50,7 @@ const RegisterForm = () => {
         })
           .then(() => {
             axiosSecure
-              .post("/users/create-user", { name, email })
+              .post("/users/create-user", { name, email, photo })
               .then((res) => {
                 toast.success(
                   `🌺 Hi, ${name}. Your account created successfully`

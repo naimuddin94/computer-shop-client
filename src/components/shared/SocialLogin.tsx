@@ -19,7 +19,7 @@ const SocialLogin = () => {
         const email = result?.user?.email;
         const photo = result?.user?.photoURL;
         axiosSecure
-          .post("/users/create-user", { name, email })
+          .post("/users/create-user", { name, email, photo })
           .then((res) => {
             setUsername(name);
             setPhoto(photo);
