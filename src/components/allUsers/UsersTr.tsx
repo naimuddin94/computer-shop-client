@@ -1,10 +1,34 @@
+"use client";
+import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { IUser } from "@/types/types";
 import moment from "moment";
 import Image from "next/image";
-import React from "react";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const UsersTr = ({ user }: { user: IUser }) => {
-  const { _id, name, email, photo, role, created_at } = user;
+  const { _id, name, email, photo, role: userRole, created_at } = user;
+  const [role, setRole] = useState(userRole);
+  const axiosSecure = useAxiosSecure();
+  const handleRole = (role: string) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: `Update the user role to ${role}!`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Update!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.put(`/users/${_id}`, { role }).then((res) => {
+          setRole(role);
+          toast.success(res.data.message);
+        });
+      }
+    });
+  };
   return (
     <tr>
       <td>
@@ -20,7 +44,7 @@ const UsersTr = ({ user }: { user: IUser }) => {
           </div>
         </div>
       </td>
-      <td>{role}</td>
+      <td>{role.toUpperCase()}</td>
       <td>{moment(created_at).startOf("day").fromNow()}</td>
       <td>
         <div className="dropdown dropdown-end">
@@ -35,16 +59,16 @@ const UsersTr = ({ user }: { user: IUser }) => {
             tabIndex={0}
             className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
+            <li onClick={() => handleRole("basic")}>
               <a>Basic</a>
             </li>
-            <li>
+            <li onClick={() => handleRole("operator")}>
               <a>Operator</a>
             </li>
-            <li>
+            <li onClick={() => handleRole("manager")}>
               <a>Manager</a>
             </li>
-            <li>
+            <li onClick={() => handleRole("admin")}>
               <a>Admin</a>
             </li>
           </ul>
