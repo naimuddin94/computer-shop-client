@@ -72,3 +72,16 @@ export interface IAuthContext {
   googleLogin: () => Promise<UserCredential>;
   logoutUser: () => Promise<void>;
 }
+
+export interface IUser {
+  _id: string;
+  name: string;
+  email: string;
+  photo: string;
+  role: string;
+  created_at: Date;
+}
+
+export interface UserTableProps {
+  users: IUser[];
+}
