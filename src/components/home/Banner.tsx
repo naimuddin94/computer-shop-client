@@ -19,8 +19,8 @@ import bannerData from "@/lib/bannerData";
 
 const Banner = () => {
   return (
-    <div className="bg-custom-background bg-cover bg-center min-h-[calc(100vh-64px)]">
-      <div className="w-64 h-64 rounded-full absolute bg-gradient-to-tr from-theme-color-300 -top-32 -left-32"></div>
+    <div className="bg-custom-background bg-cover bg-center min-h-[calc(100vh-64px)] relative overflow-hidden">
+      <div className="w-[30rem] h-[30rem] rounded-full absolute bg-gradient-to-tr from-theme-color-300/50 -top-52 -left-36 blur-3xl"></div>
       <div>
         <Swiper
           // install Swiper modules
@@ -36,7 +36,7 @@ const Banner = () => {
         >
           {bannerData?.map((data) => (
             <SwiperSlide key={data.heading}>
-              <div className="flex flex-col md:flex-row-reverse items-center justify-between text-white px-5">
+              <div className="flex gap-5 flex-col md:flex-row-reverse items-center justify-between text-white px-5 h-full bg-gradient-to-br from-theme-color-200/10 to-theme-color-400/20">
                 <div className="flex-1 flex justify-center items-center">
                   <Image
                     src={data.image}
@@ -46,7 +46,9 @@ const Banner = () => {
                   />
                 </div>
                 <div className="flex-1">
-                  <h2 className="text-7xl font-black">{data.heading}</h2>
+                  <h2 className="text-4xl md:text-6xl lg:text-7xl font-black">
+                    {data.heading}
+                  </h2>
                   <p className="mt-5 text-cream">{data.description}</p>
                 </div>
               </div>
