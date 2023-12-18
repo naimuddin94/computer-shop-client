@@ -1,4 +1,5 @@
 import Image from "next/image";
+import cpu from "/public/assets/hyperpc-perfrormance-page-banner.png"
 
 const Banner = () => {
   return (
@@ -10,10 +11,7 @@ const Banner = () => {
         voluptas sint nesciunt quae.
       </div>
       <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus molestias
-        vitae explicabo quam maiores corporis suscipit aperiam, optio tempore
-        placeat quaerat nemo. Nulla nobis excepturi, voluptas velit voluptatem
-        quos temporibus.
+        <Image src={cpu} alt="banner image" width={400} height={400} />
       </div>
     </div>
   );
