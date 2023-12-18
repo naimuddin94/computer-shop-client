@@ -27,7 +27,10 @@ const Banner = () => {
           modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
           spaceBetween={50}
           slidesPerView={1}
-          autoplay
+          speed={1000}
+          autoplay={{
+            delay: 3000,
+          }}
           navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
