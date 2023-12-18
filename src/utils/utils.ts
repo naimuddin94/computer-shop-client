@@ -58,5 +58,3 @@ export const steps = [
   },
   { id: "Step 3", name: "Description", fields: ["description"] },
 ];
-
-

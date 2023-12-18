@@ -1,6 +1,12 @@
 "use client";
 import Image from "next/image";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Autoplay,
+} from "swiper/modules";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -9,6 +15,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import bannerData from "@/lib/bannerData";
 
 const Banner = () => {
   return (
@@ -17,19 +24,34 @@ const Banner = () => {
       <div>
         <Swiper
           // install Swiper modules
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
-          spaceBetween={30}
+          modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+          spaceBetween={50}
           slidesPerView={1}
+          autoplay
           navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
           onSwiper={(swiper) => console.log(swiper)}
           onSlideChange={() => console.log("slide change")}
         >
-          <SwiperSlide>Slide 1</SwiperSlide>
-          <SwiperSlide>Slide 2</SwiperSlide>
-          <SwiperSlide>Slide 3</SwiperSlide>
-          <SwiperSlide>Slide 4</SwiperSlide>
+          {bannerData?.map((data) => (
+            <SwiperSlide key={data.heading}>
+              <div className="flex flex-col md:flex-row-reverse items-center justify-between text-white px-5">
+                <div className="flex-1 flex justify-center items-center">
+                  <Image
+                    src={data.image}
+                    alt={data.heading}
+                    width={500}
+                    height={400}
+                  />
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-7xl font-black">{data.heading}</h2>
+                  <p className="mt-5 text-cream">{data.description}</p>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </div>
