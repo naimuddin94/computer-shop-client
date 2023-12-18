@@ -8,7 +8,7 @@ const DashboardLink = ({ path, text }: CustomLinkProps) => {
 
   return (
     <Link
-      className={`px-4 py-2 rounded font-medium text-center  ${
+      className={`px-4 py-2 rounded font-medium text-center w-full  ${
         pathName === path
           ? "text-theme-color-400 bg-gradient-to-tl from-theme-yellow to-theme-secondary cursor-not-allowed"
           : "bg-gradient-to-tl from-theme-color-400 to-theme-color-200 text-white hover:from-theme-color-300"

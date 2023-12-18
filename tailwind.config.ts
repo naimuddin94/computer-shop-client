@@ -7,6 +7,11 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    extend: {
+      backgroundImage: {
+        "custom-background": "url('/assets/herobg.png')",
+      },
+    },
     fontFamily: {
       poppins: ["'Poppins', sans-serif"],
     },
