@@ -5,6 +5,8 @@ import image4 from "/public/assets/DSC_8894-802x802-1.png";
 import image5 from "/public/assets/c3w-pro_156cdb0c-99a7-4700-89e9-15d89d9f5a6f_600x600.webp";
 import image6 from "/public/assets/StarEnginePro_7819399e-aac0-4101-96ab-83903d1728fb-transformed.png";
 import image7 from "/public/assets/mcw5w5x-mcw5b5x-1.webp";
+import image8 from "/public/assets/8T-C70DW1X-70inch-android-tv-1-new-300x300.png";
+import image9 from "/public/assets/d18333f8-38b5-48e6-9525-a2d665e15d59.png";
 
 const bannerData = [
   {
@@ -61,15 +63,15 @@ export const categoryData = [
     category: "Desktop",
   },
   {
-    image: image3,
+    image: image9,
     category: "Laptop",
   },
   {
-    image: image4,
+    image: image6,
     category: "Accessories",
   },
   {
-    image: image5,
+    image: image8,
     category: "Television",
   },
 ];
