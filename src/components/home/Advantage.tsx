@@ -3,37 +3,18 @@ import { FaCircleCheck } from "react-icons/fa6";
 import {
   MdLocalOffer,
   MdHomeRepairService,
-  MdMiscellaneousServices,
   MdDesignServices,
 } from "react-icons/md";
-
-
+import AdvantageCard from "./AdvantageCard";
 
 const Advantage = () => {
   return (
-    <div className="flex items-center justify-between text-lg font-semibold">
-      <div>
-        <TbTruckDelivery />
-        <h3>Fast Delivery</h3>
-      </div>
-      <div>
-        <FaCircleCheck />
-        <h3>100% Authentic Products</h3>
-      </div>
-      <div>
-        <MdLocalOffer />
-        <h3>Best Price Guaranteed</h3>
-      </div>
-      <div>
-        <MdMiscellaneousServices />
-        <h3>1 Years Service Free</h3>
-      </div>
-      <div>
-        <MdHomeRepairService />
-        <h3>Quick Service</h3>
-      </div>
-      <MdDesignServices />
-      <div>Quality Installation</div>
+    <div className="flex items-center justify-between bg-gradient-to-br from-theme-yellow to-theme-color-100 p-4 ">
+      <AdvantageCard text="Fast Delivery" Icon={TbTruckDelivery} />
+      <AdvantageCard text="100% Authentic Products" Icon={FaCircleCheck} />
+      <AdvantageCard text="Best Price Guaranteed" Icon={MdLocalOffer} />
+      <AdvantageCard text="Quick Service" Icon={MdHomeRepairService} />
+      <AdvantageCard text="Quality Installation" Icon={MdDesignServices} />
     </div>
   );
 };

@@ -1,5 +1,8 @@
 import { User, UserCredential } from "firebase/auth";
-import { ReactNode } from "react";
+import {
+  ElementType,
+  ReactNode,
+} from "react";
 
 export interface ChildrenProps {
   children: ReactNode;
@@ -84,4 +87,9 @@ export interface IUser {
 
 export interface UserTableProps {
   users: IUser[];
+}
+
+export interface AdvantageCardProps {
+  text: string;
+  Icon: ElementType;
 }
