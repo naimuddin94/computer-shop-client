@@ -1,8 +1,6 @@
 import { User, UserCredential } from "firebase/auth";
-import {
-  ElementType,
-  ReactNode,
-} from "react";
+import { StaticImageData } from "next/image";
+import { ElementType, ReactNode } from "react";
 
 export interface ChildrenProps {
   children: ReactNode;
@@ -92,4 +90,8 @@ export interface UserTableProps {
 export interface AdvantageCardProps {
   text: string;
   Icon: ElementType;
+}
+
+export interface CategoryCardProps {
+  category: { image: StaticImageData; category: string };
 }

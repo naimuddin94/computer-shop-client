@@ -51,4 +51,27 @@ const bannerData = [
   },
 ];
 
+export const categoryData = [
+  {
+    image: image1,
+    category: "CC Camera",
+  },
+  {
+    image: image2,
+    category: "Desktop",
+  },
+  {
+    image: image3,
+    category: "Laptop",
+  },
+  {
+    image: image4,
+    category: "Accessories",
+  },
+  {
+    image: image5,
+    category: "Television",
+  },
+];
+
 export default bannerData;
