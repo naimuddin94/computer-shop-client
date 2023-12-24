@@ -1,17 +1,20 @@
 import useAxiosSecure from "@/hooks/useAxiosSecure";
+import { IProduct } from "@/types/types";
 import React from "react";
+import Card from "../shared/Card";
 
 const Products = async () => {
   const axiosSecure = useAxiosSecure();
   const response = await axiosSecure.get("/products");
-  const products = response.data;
-  console.log(products);
+  const products: IProduct[] = response.data;
+
   return (
     <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa eum facere
-      consectetur delectus fugiat assumenda magni possimus atque blanditiis,
-      explicabo voluptatum ea quibusdam est veniam excepturi adipisci, eos quos?
-      Sed?
+      <div className="flex gap-4 flex-col md:flex-row flex-wrap justify-center my-8">
+        {products.map((product) => (
+          <Card key={product._id} product={product} />
+        ))}
+      </div>
     </div>
   );
 };

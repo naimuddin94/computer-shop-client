@@ -3,3 +3,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .gradient-color {
+    @apply from-theme-yellow to-theme-color-100;
+  }
+}

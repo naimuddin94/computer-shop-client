@@ -95,3 +95,22 @@ export interface AdvantageCardProps {
 export interface CategoryCardProps {
   category: { image: StaticImageData; category: string };
 }
+
+export interface Publisher {
+  name: string;
+  email: string;
+}
+
+export interface IProduct {
+  publisher: Publisher;
+  _id: string;
+  name: string;
+  images: string[];
+  category: string;
+  brand: string;
+  price: number;
+  features: string[];
+  description: string;
+  approved: boolean;
+  created_at: Date;
+}
