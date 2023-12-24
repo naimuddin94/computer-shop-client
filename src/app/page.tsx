@@ -1,4 +1,4 @@
-import { Advantage, Banner, Category } from "@/components";
+import { Advantage, Banner, Category, Products } from "@/components";
 
 export default function Home() {
   return (
@@ -6,6 +6,7 @@ export default function Home() {
       <Banner />
       <Advantage />
       <Category />
+      <Products />
     </main>
   );
 }

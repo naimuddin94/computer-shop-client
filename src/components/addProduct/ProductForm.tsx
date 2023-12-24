@@ -123,7 +123,7 @@ const ProductForm = () => {
                     {...register("images")}
                     type="file"
                     multiple
-                    accept=".jpeg, .png, .jpg"
+                    accept=".jpeg, .png, .jpg, .webp"
                     className="file-input file-input-bordered file-input-accent rounded w-full"
                   />
                   {errors.images?.message && (
