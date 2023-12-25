@@ -10,8 +10,8 @@ const Products = async () => {
 
   return (
     <div>
-      <Headline text="Products"/>
-      <div className="flex gap-4 flex-col md:flex-row flex-wrap justify-center my-8">
+      <Headline text="Products" />
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 my-8 px-4">
         {products.map((product) => (
           <Card key={product._id} product={product} />
         ))}

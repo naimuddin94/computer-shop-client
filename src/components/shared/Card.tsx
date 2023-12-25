@@ -7,7 +7,7 @@ import Image from "next/image";
 const Card = ({ product }: { product: IProduct }) => {
   const { _id, name, price, brand, category, features, images } = product;
   return (
-    <div className="card card-compact md:w-96 bg-white hover:shadow-xl duration-500 cursor-pointer rounded text-theme-color-400">
+    <div className="card card-compact bg-white hover:shadow-xl duration-500 cursor-pointer rounded text-theme-color-400">
       <figure className="p-4">
         <Image src={images[0]} alt={name} width={400} height={400} className=""/>
       </figure>
