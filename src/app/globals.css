@@ -8,4 +8,7 @@
   .gradient-color {
     @apply from-theme-yellow to-theme-color-100;
   }
+  .text-gradient{
+    @apply  bg-gradient-to-tr from-theme-color-200 to-theme-color-400 inline-block text-transparent bg-clip-text;
+  }
 }

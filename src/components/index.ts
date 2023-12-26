@@ -9,6 +9,7 @@ import Products from "./home/Products";
 import Headline from "./utility/Headline";
 import Button from "./utility/Button";
 import WhyUs from "./home/WhyUs";
+import ActionCameraSection from "./home/ActionCameraSection";
 
 export {
   LoginForm,
@@ -22,4 +23,5 @@ export {
   Headline,
   Button,
   WhyUs,
+  ActionCameraSection,
 };

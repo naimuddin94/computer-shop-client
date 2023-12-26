@@ -17,7 +17,7 @@ const WhyUs = () => {
           <h4 className="text-theme-color-400 uppercase font-semibold">
             SECURITY ZONE
           </h4>
-          <h1 className="text-3xl md:text-5xl font-black bg-gradient-to-tr from-theme-color-200 to-theme-color-400 inline-block text-transparent bg-clip-text">
+          <h1 className="text-3xl md:text-5xl font-black text-gradient">
             We helping you find <br /> your best products
           </h1>
           <p className="max-w-lg text-sm text-text/90 font-light">
