@@ -6,6 +6,9 @@ import Banner from "./home/Banner";
 import Advantage from "./home/Advantage";
 import Category from "./home/Category";
 import Products from "./home/Products";
+import Headline from "./utility/Headline";
+import Button from "./utility/Button";
+import WhyUs from "./home/WhyUs";
 
 export {
   LoginForm,
@@ -15,5 +18,8 @@ export {
   Banner,
   Advantage,
   Category,
-  Products
+  Products,
+  Headline,
+  Button,
+  WhyUs,
 };
