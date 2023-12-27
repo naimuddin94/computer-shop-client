@@ -6,7 +6,6 @@ import AuthProviders from "@/providers/AuthProviders";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 export const metadata: Metadata = {
   title: "City Computers",
   description: "A Trustable Computer Shop",
@@ -22,6 +21,7 @@ export default function RootLayout({
       <html lang="en">
         <body className="bg-cream font-poppins text-text">
           <Navbar>{children}</Navbar>
+
           <ToastContainer
             position="top-center"
             autoClose={3000}

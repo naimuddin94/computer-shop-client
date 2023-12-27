@@ -3,6 +3,7 @@ import {
   Advantage,
   Banner,
   Category,
+  Footer,
   Products,
   WhyUs,
 } from "@/components";
@@ -20,6 +21,7 @@ export default function Home() {
       <Features />
       <ActionCameraSection />
       <Advertizement />
+      <Footer />
     </main>
   );
 }

@@ -41,12 +41,7 @@ const Navbar = ({ children }: ChildrenProps) => {
                   className="btn btn-ghost btn-circle avatar"
                 >
                   <div className="w-10 rounded-full">
-                    <Image
-                      src={photo}
-                      alt="avatar"
-                      width={40}
-                      height={40}
-                    />
+                    <Image src={photo} alt="avatar" width={40} height={40} />
                   </div>
                 </div>
                 <ul

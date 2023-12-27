@@ -10,6 +10,7 @@ import Headline from "./utility/Headline";
 import Button from "./utility/Button";
 import WhyUs from "./home/WhyUs";
 import ActionCameraSection from "./home/ActionCameraSection";
+import Footer from "./footer/Footer";
 
 export {
   LoginForm,
@@ -24,4 +25,5 @@ export {
   Button,
   WhyUs,
   ActionCameraSection,
+  Footer,
 };
