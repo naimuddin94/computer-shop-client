@@ -114,3 +114,9 @@ export interface IProduct {
   approved: boolean;
   created_at: Date;
 }
+
+export interface IProductDetailsProps {
+  params: {
+    productId: string;
+  };
+}
