@@ -26,7 +26,7 @@ const Navbar = ({ children }: ChildrenProps) => {
             City Computer
           </div>
           <div className="flex-none hidden lg:block">
-            <ul className="menu menu-horizontal gap-4">
+            <ul className="menu menu-horizontal gap-4 items-center">
               {/* Navbar menu content here */}
               <NavItems />
             </ul>
