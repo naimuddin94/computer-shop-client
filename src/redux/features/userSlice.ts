@@ -7,7 +7,7 @@ const initialState = {
   name: "",
   email: "",
   photo: "",
-  isLoading: false,
+  isLoading: true,
   isError: false,
   error: "",
 };
@@ -15,7 +15,9 @@ const initialState = {
 export const createUser = createAsyncThunk(
   "user/createUser",
   async ({ email, password, name, photo }: ICreateUser) => {
+    console.log("log from userSlice 18", photo);
     const data = await createUserWithEmailAndPassword(auth, email, password);
+    console.log(data.user);
     if (auth.currentUser !== null) {
       await updateProfile(auth.currentUser, {
         displayName: name,
@@ -36,7 +38,24 @@ export const createUser = createAsyncThunk(
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setUser: (state, { payload }) => {
+      state.email = payload.email;
+      state.name = payload.name;
+      state.photo = payload.photo;
+    },
+    toggleLoading: (state, { payload }) => {
+      state.isLoading = payload;
+    },
+    logoutUser: (state) => {
+      (state.name = ""),
+        (state.email = ""),
+        (state.photo = ""),
+        (state.isLoading = true),
+        (state.isError = false),
+        (state.error = "");
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(createUser.pending, (state) => {
@@ -47,10 +66,11 @@ const userSlice = createSlice({
           (state.error = "");
       })
       .addCase(createUser.fulfilled, (state, { payload }) => {
-        if (payload.email && payload.name) {
+        if (payload.email && payload.name && payload.photo) {
           (state.email = payload.email),
             (state.name = payload.name),
-            (state.isLoading = false),
+            (state.photo = payload.photo);
+          (state.isLoading = false),
             (state.isError = false),
             (state.error = "");
         }
@@ -66,5 +86,7 @@ const userSlice = createSlice({
       });
   },
 });
+
+export const { setUser, toggleLoading, logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;

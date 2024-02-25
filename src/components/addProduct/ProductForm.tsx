@@ -11,12 +11,13 @@ import Navigation from "./Navigation";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import ImageUpload from "../shared/ImageUpload";
 import { toast } from "react-toastify";
-import useAuthInfo from "@/hooks/useAuthInfo";
 import PrivateRoute from "../routes/PrivateRoute";
+import { RootState } from "@/redux/store/store";
+import { useSelector } from "react-redux";
 interface Inputs extends yup.Asserts<typeof AddProductSchema> {}
 
 const ProductForm = () => {
-  const { user } = useAuthInfo();
+  const { name, email } = useSelector((state: RootState) => state.user);
   const axiosSecure = useAxiosSecure();
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
@@ -49,8 +50,8 @@ const ProductForm = () => {
       const images = await Promise.all(uploadPromises);
 
       const publisher = {
-        name: user?.displayName,
-        email: user?.email,
+        name,
+        email,
       };
 
       const product = { images, features, ...reamingData, publisher };
@@ -105,7 +106,7 @@ const ProductForm = () => {
                     id="name"
                     {...register("name")}
                     type="text"
-                    placeholder="enter your name"
+                    placeholder="Enter product name"
                     className="input input-bordered rounded"
                   />
                   {errors.name?.message && (
@@ -143,7 +144,7 @@ const ProductForm = () => {
                     id="price"
                     {...register("price")}
                     type="text"
-                    placeholder="product price"
+                    placeholder="Product price"
                     className="input input-bordered rounded"
                   />
                   {errors.price?.message && (

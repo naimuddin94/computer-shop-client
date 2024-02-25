@@ -127,3 +127,12 @@ export interface ICreateUser {
   name: string;
   photo: string;
 }
+
+export interface IUserPayload {
+  email: string;
+  name: string;
+  photo: string;
+  isLoading: boolean;
+  isError: boolean;
+  error: string;
+}

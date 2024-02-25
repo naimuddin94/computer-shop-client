@@ -3,8 +3,11 @@ import { ChildrenProps } from "@/types/types";
 import { RxHamburgerMenu } from "react-icons/rx";
 import NavItems from "../utility/NavItems";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store/store";
 
 const Navbar = ({ children }: ChildrenProps) => {
+  const { email, name, photo } = useSelector((state: RootState) => state.user);
   return (
     <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -29,9 +32,9 @@ const Navbar = ({ children }: ChildrenProps) => {
               <NavItems />
             </ul>
           </div>
-          {/* {user && (
+          {email && (
             <>
-              <h3 className="mx-3">{username}</h3>
+              <h3 className="mx-3">{name}</h3>
               <div className="dropdown dropdown-end">
                 <div
                   tabIndex={0}
@@ -49,13 +52,13 @@ const Navbar = ({ children }: ChildrenProps) => {
                   <li>
                     <a>Settings</a>
                   </li>
-                  <li onClick={() => logoutUser()}>
+                  <li>
                     <a>Logout</a>
                   </li>
                 </ul>
               </div>
             </>
-          )} */}
+          )}
         </div>
         {/* Page content here */}
         {children}
