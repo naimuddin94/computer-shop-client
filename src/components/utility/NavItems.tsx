@@ -1,11 +1,10 @@
 "use client";
-import useAuthInfo from "@/hooks/useAuthInfo";
 import CustomLink from "./CustomLink";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import Link from "next/link";
 
 const NavItems = () => {
-  const { user } = useAuthInfo();
+  const user = null;
   return (
     <>
       <CustomLink path="/" text="Home" />
@@ -15,7 +14,7 @@ const NavItems = () => {
       <CustomLink path="/dashboard" text="Dashboard" />
       {!user && <CustomLink path="/login" text="Login" />}
       <Link href="/cart" className="flex">
-        <MdOutlineShoppingCart size={25} className="text-theme-yellow" />
+        <MdOutlineShoppingCart size={25} className="text-theme-color-200" />
         <sup className="text-base text-theme-color-400">0</sup>
       </Link>
     </>

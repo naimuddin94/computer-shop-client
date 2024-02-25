@@ -2,11 +2,9 @@
 import { ChildrenProps } from "@/types/types";
 import { RxHamburgerMenu } from "react-icons/rx";
 import NavItems from "../utility/NavItems";
-import useAuthInfo from "@/hooks/useAuthInfo";
 import Image from "next/image";
 
 const Navbar = ({ children }: ChildrenProps) => {
-  const { user, username, photo, logoutUser } = useAuthInfo();
   return (
     <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -31,7 +29,7 @@ const Navbar = ({ children }: ChildrenProps) => {
               <NavItems />
             </ul>
           </div>
-          {user && (
+          {/* {user && (
             <>
               <h3 className="mx-3">{username}</h3>
               <div className="dropdown dropdown-end">
@@ -57,7 +55,7 @@ const Navbar = ({ children }: ChildrenProps) => {
                 </ul>
               </div>
             </>
-          )}
+          )} */}
         </div>
         {/* Page content here */}
         {children}

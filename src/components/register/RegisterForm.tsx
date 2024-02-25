@@ -7,21 +7,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { RegisterSchema } from "@/lib/yupSchemas";
 import ImageUpload from "../shared/ImageUpload";
-import useAuthInfo from "@/hooks/useAuthInfo";
-import { UserCredential, updateProfile } from "firebase/auth";
-import { toast } from "react-toastify";
-import { FirebaseError } from "firebase/app";
-import { useRouter } from "next/navigation";
-import { handleFirebaseError } from "@/lib/customLibery";
-import useAxiosSecure from "@/hooks/useAxiosSecure";
+import { useDispatch } from "react-redux";
+import { createUser } from "@/redux/features/userSlice";
+import { AppDispatch } from "@/redux/store/store";
 
 interface RegisterInputs extends yup.Asserts<typeof RegisterSchema> {}
 
 const RegisterForm = () => {
-  const axiosSecure = useAxiosSecure();
-  const router = useRouter();
-  const { createUser, setUsername, setPhoto, setLoading } = useAuthInfo();
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch: AppDispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -39,36 +33,7 @@ const RegisterForm = () => {
       photo = await ImageUpload(photoFile[0]);
     }
 
-    createUser(email, password)
-      .then((result: UserCredential) => {
-        // update profile
-        setUsername(name);
-        setPhoto(photo);
-        updateProfile(result.user, {
-          displayName: name,
-          photoURL: photo,
-        })
-          .then(() => {
-            axiosSecure
-              .post("/users/create-user", { name, email, photo })
-              .then((res) => {
-                toast.success(
-                  `🌺 Hi, ${name}. Your account created successfully`
-                );
-                reset();
-                router.push("/");
-              })
-              .catch((err) => {
-                setLoading(false);
-                toast.error(err.message);
-              });
-          })
-          .catch((err) => toast.error("During update profile", err.message));
-      })
-      .catch((err: FirebaseError) => {
-        handleFirebaseError(err);
-        return setLoading(false);
-      });
+    dispatch(createUser({ email, password, name, photo }));
   };
 
   return (

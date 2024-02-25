@@ -12,8 +12,8 @@ import { useRouter } from "next/navigation";
 import { handleFirebaseError } from "@/lib/customLibery";
 
 const LoginForm = () => {
+  const loading = false; 
   const [showPassword, setShowPassword] = useState(false);
-  const { loginUser, loading, setLoading } = useAuthInfo();
   const router = useRouter();
   const {
     register,
@@ -22,15 +22,7 @@ const LoginForm = () => {
 
   const loginHandler: SubmitHandler<LoginInputs> = (data) => {
     const { email, password } = data;
-    loginUser(email, password)
-      .then((result: UserCredential) => {
-        toast.success(`👋🏻 welcome ${result?.user?.displayName}`);
-        router.push("/");
-      })
-      .catch((err: FirebaseError) => {
-        handleFirebaseError(err);
-        setLoading(false);
-      });
+    
   };
 
   return (

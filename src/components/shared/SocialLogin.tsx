@@ -1,5 +1,4 @@
 "use client";
-import useAuthInfo from "@/hooks/useAuthInfo";
 import useAxiosSecure from "@/hooks/useAxiosSecure";
 import { handleFirebaseError } from "@/lib/customLibery";
 import { FirebaseError } from "firebase/app";
@@ -11,30 +10,8 @@ import { toast } from "react-toastify";
 const SocialLogin = () => {
   const axiosSecure = useAxiosSecure();
   const router = useRouter();
-  const { googleLogin, setLoading, setUsername, setPhoto } = useAuthInfo();
   const handleGoogleLogin = () => {
-    googleLogin()
-      .then((result: UserCredential) => {
-        const name = result?.user?.displayName;
-        const email = result?.user?.email;
-        const photo = result?.user?.photoURL;
-        axiosSecure
-          .post("/users/create-user", { name, email, photo })
-          .then((res) => {
-            setUsername(name);
-            setPhoto(photo);
-            toast.success(`👋🏻 welcome ${result?.user?.displayName}`);
-            router.push("/");
-          })
-          .catch((err) => {
-            setLoading(false);
-            toast.error(err.message);
-          });
-      })
-      .catch((err: FirebaseError) => {
-        handleFirebaseError(err);
-        setLoading(false);
-      });
+    
   };
   return (
     <button

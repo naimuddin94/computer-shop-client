@@ -5,6 +5,7 @@ import Navbar from "@/components/shared/Navbar";
 import AuthProviders from "@/providers/AuthProviders";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReduxProvider from "@/providers/ReduxProvider";
 
 export const metadata: Metadata = {
   title: "City Computers",
@@ -17,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <AuthProviders>
+    <ReduxProvider>
       <html lang="en">
         <body className="bg-cream font-poppins text-text">
           <Navbar>{children}</Navbar>
@@ -36,6 +37,6 @@ export default function RootLayout({
           />
         </body>
       </html>
-    </AuthProviders>
+    </ReduxProvider>
   );
 }
