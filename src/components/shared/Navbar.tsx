@@ -8,6 +8,11 @@ import { RootState } from "@/redux/store/store";
 
 const Navbar = ({ children }: ChildrenProps) => {
   const { email, name, photo } = useSelector((state: RootState) => state.user);
+
+  const handleLogout = () => { 
+
+  };
+  
   return (
     <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -52,7 +57,7 @@ const Navbar = ({ children }: ChildrenProps) => {
                   <li>
                     <a>Settings</a>
                   </li>
-                  <li>
+                  <li onClick={()=>handleLogout}>
                     <a>Logout</a>
                   </li>
                 </ul>
