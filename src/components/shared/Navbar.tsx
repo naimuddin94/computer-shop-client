@@ -3,16 +3,21 @@ import { ChildrenProps } from "@/types/types";
 import { RxHamburgerMenu } from "react-icons/rx";
 import NavItems from "../utility/NavItems";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
+import { signOut } from "firebase/auth";
+import { auth } from "@/firebase/firebase.config";
+import { logoutUser } from "@/redux/features/userSlice";
 
 const Navbar = ({ children }: ChildrenProps) => {
   const { email, name, photo } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
 
-  const handleLogout = () => { 
-
+  const handleLogout = () => {
+    signOut(auth);
+    dispatch(logoutUser());
   };
-  
+
   return (
     <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -57,7 +62,7 @@ const Navbar = ({ children }: ChildrenProps) => {
                   <li>
                     <a>Settings</a>
                   </li>
-                  <li onClick={()=>handleLogout}>
+                  <li onClick={() => handleLogout()}>
                     <a>Logout</a>
                   </li>
                 </ul>

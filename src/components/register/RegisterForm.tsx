@@ -33,7 +33,6 @@ const RegisterForm = () => {
       photo = await ImageUpload(photoFile[0]);
     }
 
-    console.log(photo);
 
     dispatch(createUser({ email, password, name, photo }));
   };

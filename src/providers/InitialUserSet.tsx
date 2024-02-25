@@ -15,9 +15,9 @@ const InitialUserSet = ({ children }: { children: ReactNode }) => {
       if (user) {
         dispatch(
           setUser({
-            email: user.email,
-            name: user.displayName,
-            photo: user.photoURL,
+            email: user?.email,
+            name: user?.displayName,
+            photo: user?.photoURL,
           })
         );
         dispatch(toggleLoading(false));

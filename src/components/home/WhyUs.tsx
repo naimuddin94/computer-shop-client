@@ -1,8 +1,4 @@
 import Image from "next/image";
-import { TbDiscount2 } from "react-icons/tb";
-import image1 from "/public/assets/65fb66da153542af842f4de0144245f3.png";
-import image2 from "/public/assets/Battle_195_RTX_NVIDIA-EK_Homepage_Desktop_Banner.png";
-import image3 from "/public/assets/Helios-Side-Black-4080.png";
 import image4 from "/public/assets/mcw5w5x-mcw5b5x-1.webp";
 
 const WhyUs = () => {
