@@ -1,4 +1,5 @@
 import { auth } from "@/firebase/firebase.config";
+import { axiosBase } from "@/hooks/useAxiosSecure";
 import { ICreateUser } from "@/types/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -15,13 +16,17 @@ const initialState = {
 export const createUser = createAsyncThunk(
   "user/createUser",
   async ({ email, password, name, photo }: ICreateUser) => {
-    console.log("log from userSlice 18", photo);
     const data = await createUserWithEmailAndPassword(auth, email, password);
-    console.log(data.user);
     if (auth.currentUser !== null) {
       await updateProfile(auth.currentUser, {
         displayName: name,
         photoURL: photo,
+      });
+
+      await axiosBase.post("/users/create-user", {
+        name: data.user.displayName,
+        email: data.user.email,
+        photo: data.user.photoURL,
       });
     } else {
       throw new Error("Current user is null");

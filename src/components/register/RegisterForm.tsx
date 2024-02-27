@@ -10,10 +10,12 @@ import ImageUpload from "../shared/ImageUpload";
 import { useDispatch } from "react-redux";
 import { createUser } from "@/redux/features/userSlice";
 import { AppDispatch } from "@/redux/store/store";
+import { useRouter } from "next/navigation";
 
 interface RegisterInputs extends yup.Asserts<typeof RegisterSchema> {}
 
 const RegisterForm = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const dispatch: AppDispatch = useDispatch();
   const {
@@ -33,8 +35,9 @@ const RegisterForm = () => {
       photo = await ImageUpload(photoFile[0]);
     }
 
-
-    dispatch(createUser({ email, password, name, photo }));
+    dispatch(createUser({ email, password, name, photo })).then(() => {
+      router.push("/");
+    });
   };
 
   return (

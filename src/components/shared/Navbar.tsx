@@ -3,6 +3,7 @@ import { ChildrenProps } from "@/types/types";
 import { RxHamburgerMenu } from "react-icons/rx";
 import NavItems from "../utility/NavItems";
 import Image from "next/image";
+import unknownUserImage from "../../../public/assets/unknown_user.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
 import { signOut } from "firebase/auth";
@@ -51,8 +52,13 @@ const Navbar = ({ children }: ChildrenProps) => {
                   role="button"
                   className="btn btn-ghost btn-circle avatar"
                 >
-                  <div className="w-10 rounded-full">
-                    <Image src={photo} alt="avatar" width={40} height={40} />
+                  <div className="w-10 rounded-full bg-red">
+                    <Image
+                      src={photo ? photo : unknownUserImage}
+                      alt="avatar"
+                      width={40}
+                      height={40}
+                    />
                   </div>
                 </div>
                 <ul
